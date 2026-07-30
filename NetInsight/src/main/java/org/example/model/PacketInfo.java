@@ -10,12 +10,14 @@ public class PacketInfo {
     //Ethernet -> Physical
     private String sourceMac;
     private String destinationMac;
-    private String linkLayerProtocol;
+    private LinkLayerProtocol linkLayerProtocol;
+
 
     //Network Layer - IPv4, IPv6
     private String sourceIp;
     private String destinationIp;
     private String networkLayerProtocol;
+
 
 
     //Transport Layer - TCP, UDP, ICMP, PPP

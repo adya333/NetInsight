@@ -4,8 +4,7 @@ import org.pcap4j.core.PcapAddress;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.Pcaps;
-import org.pcap4j.packet.EthernetPacket;
-import org.pcap4j.packet.Packet;
+import org.pcap4j.packet.*;
 
 import java.util.List;
 
@@ -38,13 +37,9 @@ public class Main {
             while (true) {
                 Packet packet = handle.getNextPacket();
 
-                if (packet!=null && packet.contains(EthernetPacket.class)) {
-                    {
-                        EthernetPacket ethernetPacket = packet.get(EthernetPacket.class);
-                        System.out.println(ethernetPacket);
-
-                        System.out.println("=======================");
-                    }
+                if(packet!=null )
+                {
+                    System.out.println(packet.get(EthernetPacket.class).getHeader().getType().name());
                 }
             }
         } finally {
