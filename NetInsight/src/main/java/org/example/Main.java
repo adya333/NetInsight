@@ -37,10 +37,13 @@ public class Main {
             while (true) {
                 Packet packet = handle.getNextPacket();
 
-                if(packet!=null )
+                if(packet!=null)
                 {
-                    System.out.println(packet.get(EthernetPacket.class).getHeader().getType().name());
+                    System.out.println(packet.length());
+                    System.out.println(packet);
+                    System.out.println("===============================");
                 }
+
             }
         } finally {
             handle.close();

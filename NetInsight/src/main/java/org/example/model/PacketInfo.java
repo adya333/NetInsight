@@ -7,6 +7,8 @@ import lombok.Setter;
 @Getter
 public class PacketInfo {
 
+    private int size;
+
     //Ethernet -> Physical
     private String sourceMac;
     private String destinationMac;
@@ -24,6 +26,7 @@ public class PacketInfo {
     private int sourcePort;
     private int destinationPort;
     private String transportProtocol;
+
     private String applicationProtocol; // Will be infered from destination port
 
     private int payloadSize;

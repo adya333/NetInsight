@@ -1,10 +1,7 @@
 package org.example.parser;
 
 import org.example.model.PacketInfo;
-import org.pcap4j.packet.IpPacket;
-import org.pcap4j.packet.IpV4Packet;
-import org.pcap4j.packet.IpV6Packet;
-import org.pcap4j.packet.Packet;
+import org.pcap4j.packet.*;
 
 public class NetworkLayerParser {
 
@@ -23,6 +20,10 @@ public class NetworkLayerParser {
         {
             ipPacket = packet.get(IpV6Packet.class);
         }
+        if(packet.contains(ArpPacket.class))
+        {
+           // Still needs to be implemented
+        }
 
         String srcIp = ipPacket.getHeader().getSrcAddr().getHostAddress();
         String destIp = ipPacket.getHeader().getDstAddr().getHostAddress();
@@ -35,6 +36,7 @@ public class NetworkLayerParser {
 
         // This gives info about the next layer (Transport Layer) protocol type.
         String protocol = ipPacket.getHeader().getProtocol().name();
+        info.setTransportProtocol(protocol);
 
         return protocol;
     }
