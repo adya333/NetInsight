@@ -8,7 +8,7 @@ import org.pcap4j.packet.UdpPacket;
 
 public class TransportLayerParser {
 
-    public void ParseTransportLayer(Packet packet, PacketInfo packetInfo)
+    public void parseTransportLayer(Packet packet, PacketInfo packetInfo)
     {
         TransportPacket transportPacket = null;
         if(packet.contains(TcpPacket.class) )
@@ -20,9 +20,17 @@ public class TransportLayerParser {
             transportPacket = packet.get(UdpPacket.class);
         }
 
-        packetInfo.setSourcePort(transportPacket.getHeader().getSrcPort().valueAsInt());
-        packetInfo.setDestinationPort(transportPacket.getHeader().getDstPort().valueAsInt());
+        if(transportPacket!=null)
+        {
+            packetInfo.setSourcePort(transportPacket.getHeader().getSrcPort().valueAsInt());
+            packetInfo.setDestinationPort(transportPacket.getHeader().getDstPort().valueAsInt());
+            packetInfo.setTransportLayerSize(transportPacket.getHeader().length());
 
+            if(transportPacket.getPayload()!= null)
+            packetInfo.setPayloadSize(transportPacket.getPayload().length());
+            else
+            packetInfo.setPayloadSize(0);
+        }
 
     }
 }

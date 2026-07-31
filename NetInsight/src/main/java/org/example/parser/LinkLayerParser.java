@@ -21,6 +21,7 @@ public class LinkLayerParser {
         info.setSourceMac(header.getSrcAddr().toString());
         info.setDestinationMac(header.getDstAddr().toString());
         info.setLinkLayerProtocol(LinkLayerProtocol.ETHERNET);
+        info.setPhysicalLayerSize(ethernetPacket.getHeader().length());
 
         return protocol;
 

@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.model.PacketInfo;
+import org.example.parser.PacketParser;
 import org.pcap4j.core.PcapAddress;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNetworkInterface;
@@ -13,6 +15,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         List<PcapNetworkInterface> interfaces = Pcaps.findAllDevs();
+        PacketParser packetParser = new PacketParser();
 
 //        for(PcapNetworkInterface nif:interfaces)
 //        {
@@ -37,11 +40,9 @@ public class Main {
             while (true) {
                 Packet packet = handle.getNextPacket();
 
-                if(packet!=null)
-                {
-                    System.out.println(packet.length());
-                    System.out.println(packet);
-                    System.out.println("===============================");
+                if (packet!=null) {
+                    PacketInfo parsed = packetParser.parse(packet);
+                    System.out.println(parsed);
                 }
 
             }

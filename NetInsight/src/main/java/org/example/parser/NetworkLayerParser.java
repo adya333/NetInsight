@@ -8,7 +8,7 @@ public class NetworkLayerParser {
 
 
 
-    public String parseNetworkLayer(Packet packet, PacketInfo info)
+    public void parseNetworkLayer(Packet packet, PacketInfo info)
     {
 
         IpPacket ipPacket = null;
@@ -25,20 +25,24 @@ public class NetworkLayerParser {
            // Still needs to be implemented
         }
 
-        String srcIp = ipPacket.getHeader().getSrcAddr().getHostAddress();
-        String destIp = ipPacket.getHeader().getDstAddr().getHostAddress();
-        String ipVersion = ipPacket.getHeader().getVersion().name();
+        if(ipPacket!=null)
+        {
+            String srcIp = ipPacket.getHeader().getSrcAddr().getHostAddress();
+            String destIp = ipPacket.getHeader().getDstAddr().getHostAddress();
+            String ipVersion = ipPacket.getHeader().getVersion().name();
 
-        info.setSourceIp(srcIp);
-        info.setDestinationIp(destIp);
-        info.setNetworkLayerProtocol(ipVersion);
+            info.setSourceIp(srcIp);
+            info.setDestinationIp(destIp);
+            info.setNetworkLayerProtocol(ipVersion);
+            info.setNetworkLayerSize(ipPacket.getHeader().length());
 
 
-        // This gives info about the next layer (Transport Layer) protocol type.
-        String protocol = ipPacket.getHeader().getProtocol().name();
-        info.setTransportProtocol(protocol);
+            // This gives info about the next layer (Transport Layer) protocol type.
+            String protocol = ipPacket.getHeader().getProtocol().name();
+            info.setTransportProtocol(protocol);
+        }
 
-        return protocol;
+
     }
 
 
