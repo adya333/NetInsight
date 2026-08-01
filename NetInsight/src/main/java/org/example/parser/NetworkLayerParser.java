@@ -22,7 +22,7 @@ public class NetworkLayerParser {
         }
         if(packet.contains(ArpPacket.class))
         {
-           // Still needs to be implemented
+                parseArpPacket(packet, info);
         }
 
         if(ipPacket!=null)
@@ -45,6 +45,14 @@ public class NetworkLayerParser {
 
     }
 
+    public void parseArpPacket(Packet packet, PacketInfo packetInfo)
+    {
+        ArpPacket arpPacket = packet.get(ArpPacket.class);
+        packetInfo.setNetworkLayerProtocol("ARP");
+        packetInfo.setSourceIp(arpPacket.getHeader().getSrcProtocolAddr().getHostAddress());
+        packetInfo.setDestinationIp(arpPacket.getHeader().getDstProtocolAddr().getHostAddress());
+        packetInfo.setNetworkLayerSize(arpPacket.getHeader().length());
+    }
 
 
 

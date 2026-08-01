@@ -42,8 +42,12 @@ public class Main {
 
                 if (packet!=null) {
                     PacketInfo parsed = packetParser.parse(packet);
+                    System.out.println("******************************************");
                     System.out.println(parsed);
+                      System.out.println(packet);
+                    System.out.println("******************************************");
                 }
+
 
             }
         } finally {

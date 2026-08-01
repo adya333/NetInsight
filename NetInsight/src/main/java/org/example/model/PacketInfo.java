@@ -30,7 +30,7 @@ public class PacketInfo {
     private String transportProtocol;
     private int transportLayerSize;
 
-    private String applicationProtocol; // Will be infered from destination port
+    private ApplicationLayerProtocol applicationProtocol=ApplicationLayerProtocol.UNKNOWN; // Will be infered from destination port
 
 
 
@@ -91,7 +91,7 @@ public class PacketInfo {
                         destinationPort,
                         transportLayerSize,
 
-                        applicationProtocol,
+                        applicationProtocol.toString(),
 
                         payloadSize
                 );

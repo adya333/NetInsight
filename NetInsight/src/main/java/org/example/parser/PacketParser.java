@@ -14,11 +14,13 @@ public class PacketParser {
     LinkLayerParser linkLayerParser;
     NetworkLayerParser networkLayerParser;
     TransportLayerParser transportLayerParser;
+    ApplicationLayerParser applicationLayerParser;
 
     public PacketParser() {
         this.linkLayerParser = new LinkLayerParser();
         this.networkLayerParser = new NetworkLayerParser();
         this.transportLayerParser = new TransportLayerParser();
+        this.applicationLayerParser = new ApplicationLayerParser();
     }
 
     public PacketInfo parse(Packet packet)
@@ -29,6 +31,7 @@ public class PacketParser {
         linkLayerParser.parseLinkLayer(packet, info);
         networkLayerParser.parseNetworkLayer(packet, info);
         transportLayerParser.parseTransportLayer(packet, info);
+        applicationLayerParser.parseApplicationLayer(packet, info);
 
         return info;
 
