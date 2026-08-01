@@ -1,6 +1,8 @@
 package org.example.parser;
 
+import org.example.model.NetworkLayerProtocol;
 import org.example.model.PacketInfo;
+import org.example.model.TransportLayerProtocol;
 import org.pcap4j.packet.*;
 
 public class NetworkLayerParser {
@@ -29,17 +31,17 @@ public class NetworkLayerParser {
         {
             String srcIp = ipPacket.getHeader().getSrcAddr().getHostAddress();
             String destIp = ipPacket.getHeader().getDstAddr().getHostAddress();
-            String ipVersion = ipPacket.getHeader().getVersion().name();
+            String ipVersion = ipPacket.getHeader().getVersion().name().toUpperCase();
 
             info.setSourceIp(srcIp);
             info.setDestinationIp(destIp);
-            info.setNetworkLayerProtocol(ipVersion);
+            info.setNetworkLayerProtocol(NetworkLayerProtocol.valueOf(ipVersion));
             info.setNetworkLayerSize(ipPacket.getHeader().length());
 
 
             // This gives info about the next layer (Transport Layer) protocol type.
-            String protocol = ipPacket.getHeader().getProtocol().name();
-            info.setTransportProtocol(protocol);
+            String protocol = ipPacket.getHeader().getProtocol().name().toUpperCase();
+            info.setTransportProtocol(TransportLayerProtocol.valueOf(protocol));
         }
 
 
@@ -48,7 +50,7 @@ public class NetworkLayerParser {
     public void parseArpPacket(Packet packet, PacketInfo packetInfo)
     {
         ArpPacket arpPacket = packet.get(ArpPacket.class);
-        packetInfo.setNetworkLayerProtocol("ARP");
+        packetInfo.setNetworkLayerProtocol(NetworkLayerProtocol.ARP);
         packetInfo.setSourceIp(arpPacket.getHeader().getSrcProtocolAddr().getHostAddress());
         packetInfo.setDestinationIp(arpPacket.getHeader().getDstProtocolAddr().getHostAddress());
         packetInfo.setNetworkLayerSize(arpPacket.getHeader().length());

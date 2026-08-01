@@ -19,7 +19,7 @@ public class PacketInfo {
     //Network Layer - IPv4, IPv6
     private String sourceIp;
     private String destinationIp;
-    private String networkLayerProtocol;
+    private NetworkLayerProtocol networkLayerProtocol;
     private int networkLayerSize;
 
 
@@ -27,7 +27,7 @@ public class PacketInfo {
     //Transport Layer - TCP, UDP, ICMP, PPP
     private int sourcePort;
     private int destinationPort;
-    private String transportProtocol;
+    private TransportLayerProtocol transportProtocol;
     private int transportLayerSize;
 
     private ApplicationLayerProtocol applicationProtocol=ApplicationLayerProtocol.UNKNOWN; // Will be infered from destination port

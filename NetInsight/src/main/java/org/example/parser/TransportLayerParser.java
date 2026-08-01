@@ -1,10 +1,8 @@
 package org.example.parser;
 
 import org.example.model.PacketInfo;
-import org.pcap4j.packet.Packet;
-import org.pcap4j.packet.TcpPacket;
-import org.pcap4j.packet.TransportPacket;
-import org.pcap4j.packet.UdpPacket;
+import org.example.model.TransportLayerProtocol;
+import org.pcap4j.packet.*;
 
 public class TransportLayerParser {
 
@@ -19,12 +17,17 @@ public class TransportLayerParser {
         {
             transportPacket = packet.get(UdpPacket.class);
         }
+        if(packet.contains(IcmpV4CommonPacket.class))
+        {
+            parseIcmpv4Packet(packet, packetInfo);
+        }
 
         if(transportPacket!=null)
         {
             packetInfo.setSourcePort(transportPacket.getHeader().getSrcPort().valueAsInt());
             packetInfo.setDestinationPort(transportPacket.getHeader().getDstPort().valueAsInt());
             packetInfo.setTransportLayerSize(transportPacket.getHeader().length());
+//
 
             if(transportPacket.getPayload()!= null)
             packetInfo.setPayloadSize(transportPacket.getPayload().length());
@@ -32,5 +35,11 @@ public class TransportLayerParser {
             packetInfo.setPayloadSize(0);
         }
 
+    }
+
+    public void parseIcmpv4Packet(Packet packet, PacketInfo info)
+    {
+        info.setTransportProtocol(TransportLayerProtocol.ICMPV4);
+        info.setTransportLayerSize(packet.get(IcmpV4CommonPacket.class).getHeader().length());
     }
 }

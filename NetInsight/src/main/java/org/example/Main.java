@@ -16,7 +16,7 @@ public class Main {
 
         List<PcapNetworkInterface> interfaces = Pcaps.findAllDevs();
         PacketParser packetParser = new PacketParser();
-
+//
 //        for(PcapNetworkInterface nif:interfaces)
 //        {
 //          System.out.println(nif.getName());
@@ -24,17 +24,16 @@ public class Main {
 //          System.out.println("================");
 //        }
 
-        PcapNetworkInterface nif = interfaces.get(3);
+        PcapNetworkInterface nif = interfaces.get(4);
 
         System.out.println(nif.getName());
-//          System.out.println(nif.getDescription());
-//          System.out.println("================");
-
         PcapHandle handle = nif.openLive(
                 65536,
                 PcapNetworkInterface.PromiscuousMode.PROMISCUOUS,
                 10
         );
+
+
 
         try {
             while (true) {
@@ -47,7 +46,6 @@ public class Main {
                       System.out.println(packet);
                     System.out.println("******************************************");
                 }
-
 
             }
         } finally {
