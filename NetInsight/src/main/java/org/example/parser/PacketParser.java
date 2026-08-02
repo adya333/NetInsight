@@ -7,6 +7,8 @@ import org.example.model.PacketInfo;
 import org.pcap4j.packet.EthernetPacket;
 import org.pcap4j.packet.Packet;
 
+import java.util.Set;
+
 
 public class PacketParser {
 
@@ -15,12 +17,14 @@ public class PacketParser {
     NetworkLayerParser networkLayerParser;
     TransportLayerParser transportLayerParser;
     ApplicationLayerParser applicationLayerParser;
+    DirectionParser directionParser;
 
-    public PacketParser() {
+    public PacketParser(Set<String> localIps) {
         this.linkLayerParser = new LinkLayerParser();
         this.networkLayerParser = new NetworkLayerParser();
         this.transportLayerParser = new TransportLayerParser();
         this.applicationLayerParser = new ApplicationLayerParser();
+        this.directionParser = new DirectionParser(localIps);
     }
 
     public PacketInfo parse(Packet packet)
@@ -32,6 +36,7 @@ public class PacketParser {
         networkLayerParser.parseNetworkLayer(packet, info);
         transportLayerParser.parseTransportLayer(packet, info);
         applicationLayerParser.parseApplicationLayer(packet, info);
+        directionParser.parse(info);
 
         return info;
 

@@ -8,6 +8,7 @@ import lombok.Setter;
 public class PacketInfo {
 
     private int size;
+    private PacketDirection packetDirection;
 
     //Ethernet -> Physical
     private String sourceMac;
@@ -43,6 +44,7 @@ public class PacketInfo {
             ===================== Parsed Packet =====================
 
             Total Packet Size : %d bytes
+            Packet Direction  : %s
 
             Link Layer
             ---------------------------------------------------------
@@ -75,7 +77,7 @@ public class PacketInfo {
             """
                 .formatted(
                         size,
-
+                        packetDirection,
                         linkLayerProtocol,
                         sourceMac,
                         destinationMac,
