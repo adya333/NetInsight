@@ -14,6 +14,7 @@ public class TrafficStatistics {
     // Direction-wise Counters
     private long uploadBytes;
     private long downloadBytes;
+    private long unknownBytes;
 
     // Capture Lifecycle
     private Instant captureStartTime;
@@ -31,6 +32,11 @@ public class TrafficStatistics {
         uploadBytes += bytes;
     }
 
+    public void addUnknownBytes(long bytes)
+    {
+        unknownBytes += bytes;
+    }
+
     public void addDownloadBytes(long bytes) {
         downloadBytes += bytes;
     }
@@ -42,5 +48,22 @@ public class TrafficStatistics {
 
     public void stopCapture() {
         captureEndTime = Instant.now();
+    }
+
+    @Override
+    public String toString() {
+        return """
+               Total Packets : %d
+               Total Bytes   : %d
+               
+               =====Upload=====
+               Bytes: %d
+               
+               =====Download=====
+               Bytes: %d
+               
+               =====Unknown=====
+               Bytes: %d
+               """.formatted(totalPackets, totalBytes, uploadBytes, downloadBytes, unknownBytes);
     }
 }

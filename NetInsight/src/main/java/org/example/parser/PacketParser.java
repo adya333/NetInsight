@@ -19,15 +19,19 @@ public class PacketParser {
     ApplicationLayerParser applicationLayerParser;
     DirectionParser directionParser;
 
-    public PacketParser(Set<String> localIps) {
+
+
+
+    public PacketParser() {
         this.linkLayerParser = new LinkLayerParser();
         this.networkLayerParser = new NetworkLayerParser();
         this.transportLayerParser = new TransportLayerParser();
         this.applicationLayerParser = new ApplicationLayerParser();
-        this.directionParser = new DirectionParser(localIps);
+        this.directionParser = new DirectionParser();
+
     }
 
-    public PacketInfo parse(Packet packet)
+    public PacketInfo parse(Packet packet, Set<String> localIps)
     {
         PacketInfo info = new PacketInfo();
 
@@ -36,7 +40,7 @@ public class PacketParser {
         networkLayerParser.parseNetworkLayer(packet, info);
         transportLayerParser.parseTransportLayer(packet, info);
         applicationLayerParser.parseApplicationLayer(packet, info);
-        directionParser.parse(info);
+        directionParser.parse(info,localIps );
 
         return info;
 

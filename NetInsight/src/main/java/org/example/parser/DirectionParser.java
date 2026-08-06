@@ -1,5 +1,6 @@
 package org.example.parser;
 
+import org.example.capture.NetworkInterfaceResolver;
 import org.example.model.PacketDirection;
 import org.example.model.PacketInfo;
 
@@ -7,13 +8,13 @@ import java.util.Set;
 
 public class DirectionParser {
 
-    private final Set<String> localIps;
 
-    public DirectionParser(Set<String> localIps) {
-        this.localIps = localIps;
-    }
 
-    public void parse(PacketInfo info) {
+
+
+
+
+    public void parse(PacketInfo info, Set<String> localIps) {
 
         String src = info.getSourceIp();
         String dst = info.getDestinationIp();

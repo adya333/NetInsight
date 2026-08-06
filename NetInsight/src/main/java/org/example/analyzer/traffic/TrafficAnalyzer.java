@@ -31,10 +31,13 @@ public class TrafficAnalyzer {
 
             case DOWNLOAD ->
                     trafficStatistics.addDownloadBytes(packetInfo.getSize());
+            case UNKNOWN ->
+                    trafficStatistics.addUnknownBytes(packetInfo.getSize());
         }
     }
 
-    public TrafficStatistics getStatistics() {
-        return trafficStatistics;
+    public String printAnalysis() {
+        return trafficStatistics.toString();
     }
+
 }
