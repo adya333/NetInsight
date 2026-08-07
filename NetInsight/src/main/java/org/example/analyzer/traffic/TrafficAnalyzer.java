@@ -36,6 +36,17 @@ public class TrafficAnalyzer {
         }
     }
 
+    public void startCapture()
+    {
+        trafficStatistics.startCapture();
+    }
+
+    public void stopCapture()
+    {
+        trafficStatistics.stopCapture();
+    }
+
+
     public String printAnalysis() {
         return trafficStatistics.toString();
     }

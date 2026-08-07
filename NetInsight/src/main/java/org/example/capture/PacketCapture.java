@@ -39,7 +39,7 @@ public class PacketCapture {
 
         try (PcapHandle handle = openHandle(networkInterface)) {
 
-            analysisEngine.endTime();
+
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 analysisEngine.endTime();
                 System.out.println("\n===== THE VERDICT =====");
@@ -50,12 +50,10 @@ public class PacketCapture {
 
             }));
 
-
+            analysisEngine.startTime();
             while (true) {
-
-
                 Packet packet = handle.getNextPacket();
-                analysisEngine.startTime();
+
                 if(packet == null) {
                     continue;
                 }

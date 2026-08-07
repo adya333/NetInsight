@@ -7,7 +7,7 @@ import org.example.model.PacketInfo;
 public class AnalysisEngine {
 
     TrafficAnalyzer trafficAnalyzer;
-    TrafficStatistics trafficStatistics;
+
 
     public AnalysisEngine(TrafficAnalyzer trafficAnalyzer)
     {
@@ -21,12 +21,12 @@ public class AnalysisEngine {
     }
     public void startTime()
     {
-        trafficStatistics.startCapture();
+        trafficAnalyzer.startCapture();
     }
 
     public void endTime()
     {
-        trafficStatistics.stopCapture();
+        trafficAnalyzer.stopCapture();
     }
 
     public void output()
