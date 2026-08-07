@@ -64,6 +64,10 @@ public class TrafficStatistics {
                
                =====Unknown=====
                Bytes: %d
-               """.formatted(totalPackets, totalBytes, uploadBytes, downloadBytes, unknownBytes);
+               
+               Start Time: %s
+               End Time: %s
+               """.formatted(totalPackets, totalBytes, uploadBytes, downloadBytes, unknownBytes,
+                captureEndTime.toString(), captureEndTime.toString());
     }
 }

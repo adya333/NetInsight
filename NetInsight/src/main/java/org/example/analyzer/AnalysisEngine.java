@@ -16,7 +16,17 @@ public class AnalysisEngine {
 
     public void analysis(PacketInfo packetInfo)
     {
+
         trafficAnalyzer.processStatistics(packetInfo);
+    }
+    public void startTime()
+    {
+        trafficStatistics.startCapture();
+    }
+
+    public void endTime()
+    {
+        trafficStatistics.stopCapture();
     }
 
     public void output()
