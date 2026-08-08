@@ -9,8 +9,19 @@ public class ApplicationLayerParser {
     public void parseApplicationLayer(Packet packet, PacketInfo packetInfo)
     {
         int destPort = packetInfo.getDestinationPort();
-        ApplicationLayerProtocol protocol =
+        int sourcePort = packetInfo.getSourcePort();
+        ApplicationLayerProtocol destProtocol =
                 ApplicationLayerProtocol.fromPort(destPort);
-        packetInfo.setApplicationProtocol(protocol);
+
+        ApplicationLayerProtocol srcProtocol =
+                ApplicationLayerProtocol.fromPort(sourcePort);
+
+        if(destProtocol != ApplicationLayerProtocol.UNKNOWN)
+        packetInfo.setApplicationProtocol(destProtocol);
+        else if(srcProtocol != ApplicationLayerProtocol.UNKNOWN)
+        packetInfo.setApplicationProtocol(srcProtocol);
+        else
+        packetInfo.setApplicationProtocol(ApplicationLayerProtocol.UNKNOWN);
+
     }
 }
