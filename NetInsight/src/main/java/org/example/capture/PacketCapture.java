@@ -46,7 +46,7 @@ public class PacketCapture {
 
                 analysisEngine.output();
 
-                handle.close();
+               // handle.close();
 
             }));
 

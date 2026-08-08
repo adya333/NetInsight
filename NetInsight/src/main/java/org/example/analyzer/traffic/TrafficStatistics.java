@@ -70,6 +70,39 @@ public class TrafficStatistics {
         return TIME_FORMATTER.format(time);
     }
 
+    private double calculateMbps() {
+
+        if (captureStartTime == null || captureEndTime == null) {
+            return 0.0;
+        }
+
+        double durationSeconds =
+                Duration.between(captureStartTime, captureEndTime).toMillis() / 1000.0;
+
+        if (durationSeconds <= 0) {
+            return 0.0;
+        }
+
+        // Bytes -> bits -> megabits
+        return (totalBytes * 8.0) / durationSeconds / 1_000_000;
+    }
+
+
+    private double calculatePps() {
+
+        if (captureStartTime == null || captureEndTime == null) {
+            return 0.0;
+        }
+
+        double durationSeconds =
+                Duration.between(captureStartTime, captureEndTime).toMillis() / 1000.0;
+
+        if (durationSeconds <= 0) {
+            return 0.0;
+        }
+
+        return totalPackets / durationSeconds;
+    }
 
     private String formatDuration() {
 
@@ -114,6 +147,11 @@ public class TrafficStatistics {
                Start Time : %s
                End Time   : %s
                Duration   : %s
+               
+               =====Performance=====
+                           Average Speed : %.2f Mbps
+                           Packet Rate   : %.2f PPS
+               
                """.formatted(
                 totalPackets,
                 totalBytes,
@@ -122,7 +160,9 @@ public class TrafficStatistics {
                 unknownBytes,
                 formatTime(captureStartTime),
                 formatTime(captureEndTime),
-                formatDuration()
+                formatDuration(),
+                calculateMbps(),
+                calculatePps()
         );
     }
 }
