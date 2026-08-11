@@ -33,9 +33,6 @@ public class PacketInfo {
 
     // Application - HTTP, HTTPS, DNS..
     private ApplicationLayerProtocol applicationProtocol=ApplicationLayerProtocol.UNKNOWN; // Will be infered from destination port
-
-
-
     private int payloadSize;
 
 

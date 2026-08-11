@@ -18,6 +18,11 @@ public class LinkLayerDistributor {
 
     public void updateNetworkLayer(PacketInfo packetInfo)
     {
+            LinkLayerProtocol linkLayerProtocol = packetInfo.getLinkLayerProtocol();
+            ProtocolData protocolData = linkLayerProtocolProtocolDataMap.computeIfAbsent(linkLayerProtocol,
+                    key->new ProtocolData());
 
+            protocolData.setPacketcount(protocolData.getPacketcount()+1);
+            protocolData.setBytes(protocolData.getBytes()+((long) packetInfo.getPhysicalLayerSize()));
     }
 }
