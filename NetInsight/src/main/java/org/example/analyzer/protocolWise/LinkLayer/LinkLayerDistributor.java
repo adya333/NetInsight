@@ -1,6 +1,6 @@
 package org.example.analyzer.protocolWise.LinkLayer;
 
-import org.example.analyzer.protocolWise.ProtocolData;
+import org.example.analyzer.protocolWise.ProtocolWiseAnalysisData;
 import org.example.model.LinkLayerProtocol;
 import org.example.model.PacketInfo;
 
@@ -9,20 +9,20 @@ import java.util.Map;
 
 public class LinkLayerDistributor {
 
-    Map<LinkLayerProtocol, ProtocolData> linkLayerProtocolProtocolDataMap;
+    Map<LinkLayerProtocol, ProtocolWiseAnalysisData> linkLayerProtocolProtocolDataMap;
 
     public LinkLayerDistributor()
     {
         linkLayerProtocolProtocolDataMap = new HashMap<>();
     }
 
-    public void updateNetworkLayer(PacketInfo packetInfo)
+    public void updateLinkLayerDistributor(PacketInfo packetInfo)
     {
             LinkLayerProtocol linkLayerProtocol = packetInfo.getLinkLayerProtocol();
-            ProtocolData protocolData = linkLayerProtocolProtocolDataMap.computeIfAbsent(linkLayerProtocol,
-                    key->new ProtocolData());
+            ProtocolWiseAnalysisData protocolWiseAnalysisData = linkLayerProtocolProtocolDataMap.computeIfAbsent(linkLayerProtocol,
+                    key->new ProtocolWiseAnalysisData());
 
-            protocolData.setPacketcount(protocolData.getPacketcount()+1);
-            protocolData.setBytes(protocolData.getBytes()+((long) packetInfo.getPhysicalLayerSize()));
+            protocolWiseAnalysisData.setPacketcount(protocolWiseAnalysisData.getPacketcount()+1);
+            protocolWiseAnalysisData.setBytes(protocolWiseAnalysisData.getBytes()+((long) packetInfo.getPhysicalLayerSize()));
     }
 }

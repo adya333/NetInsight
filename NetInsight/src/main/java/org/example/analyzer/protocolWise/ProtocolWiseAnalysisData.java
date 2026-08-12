@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ProtocolData {
+public class ProtocolWiseAnalysisData {
      long packetcount;
      long bytes;
 }
