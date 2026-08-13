@@ -25,4 +25,8 @@ public class LinkLayerDistributor {
             protocolWiseAnalysisData.setPacketcount(protocolWiseAnalysisData.getPacketcount()+1);
             protocolWiseAnalysisData.setBytes(protocolWiseAnalysisData.getBytes()+((long) packetInfo.getPhysicalLayerSize()));
     }
+
+    public Map<LinkLayerProtocol, ProtocolWiseAnalysisData> getLinkLayerProtocolProtocolDataMap() {
+        return linkLayerProtocolProtocolDataMap;
+    }
 }

@@ -8,4 +8,11 @@ import lombok.Setter;
 public class ProtocolWiseAnalysisData {
      long packetcount;
      long bytes;
+
+    @Override
+    public String toString()
+    {
+        return "Packets: " + packetcount +
+                ", Bytes: " + bytes;
+    }
 }

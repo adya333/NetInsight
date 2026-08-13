@@ -24,4 +24,8 @@ public class TransportLayerDistributor {
         protocolWiseAnalysisData.setPacketcount(protocolWiseAnalysisData.getPacketcount()+1);
         protocolWiseAnalysisData.setBytes(protocolWiseAnalysisData.getBytes()+(long) packetInfo.getTransportLayerSize());
     }
+
+    public Map<TransportLayerProtocol, ProtocolWiseAnalysisData> getTransportLayerProtocolProtocolDataMap() {
+        return transportLayerProtocolProtocolDataMap;
+    }
 }

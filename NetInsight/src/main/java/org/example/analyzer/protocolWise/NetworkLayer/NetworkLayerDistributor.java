@@ -23,4 +23,8 @@ public class NetworkLayerDistributor {
         protocolWiseAnalysisData.setPacketcount(protocolWiseAnalysisData.getPacketcount()+1);
         protocolWiseAnalysisData.setBytes(protocolWiseAnalysisData.getBytes()+(long)packetInfo.getNetworkLayerSize());
     }
+
+    public Map<NetworkLayerProtocol, ProtocolWiseAnalysisData> getNetworkLayerProtocolProtocolDataMap() {
+        return networkLayerProtocolProtocolDataMap;
+    }
 }

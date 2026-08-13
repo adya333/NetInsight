@@ -25,4 +25,8 @@ public class ApplicationLayerDistributor {
         protocolWiseAnalysisData.setBytes(protocolWiseAnalysisData.getBytes()+(long)packetInfo.getPayloadSize());
 
     }
+
+    public Map<ApplicationLayerProtocol, ProtocolWiseAnalysisData> getApplicationLayerProtocolProtocolDataMap() {
+        return applicationLayerProtocolProtocolDataMap;
+    }
 }

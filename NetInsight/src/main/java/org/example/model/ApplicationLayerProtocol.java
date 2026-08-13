@@ -13,6 +13,8 @@ public enum ApplicationLayerProtocol {
     IMAP(143),
     SSH(22),
     DHCP(67),
+    SSDP(1900),
+    GCMMCS(5228),
     UNKNOWN(-1);
 
     private final int port;
